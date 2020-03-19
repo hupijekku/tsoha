@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+	<title>Ruokablogi</title>
+    </head>
+
+    <body>
+        <ul>
+            <li><a href="{{ url_for('posts_index') }}">List posts</a></li>
+            <li><a href="{{ url_for('posts_form') }}">Add a post</a></li>
+        </ul>
+
+	{% block body %}
+	    <p>
+		Content.
+	    </p>
+	{% endblock %}
+    </body>
+</html>
