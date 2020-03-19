@@ -1,7 +1,7 @@
 Types of user  
 ------
 
-**User roles not implemented yet, everyone is a User**
+**User roles not implemented yet, everyone is a User**  
 Visitor (User that has not logged in)  
 User (User that has logged in, inherits Visitor)  
 Super user (User with extended privileges, inherits User)  
