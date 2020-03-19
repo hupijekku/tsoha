@@ -2,8 +2,12 @@ Tietokantasovellus 2020
 ======
   
 
-Tietokantakaavio löytyy repositiosta kuvana tietokantakaavio.png  
+Tietokantakaavio löytyy repositiosta documentation/tietokantakaavio.png  
 Tai vaihtoehtoisesti [täältä](https://dbdiagram.io/d/5e6a5b1b4495b02c3b882b06)  
+
+Sovellus herokussa [täällä](https://tsoha-food-blog.herokuapp.com/)  
+
+User storyt [täällä](https://github.com/hupijekku/tsoha/tree/master/documentation)
 
 Sovellus on reseptipalvelu, jonne kirjautuneet käyttäjät voivat lisätä omia reseptejään, äänestää muiden reseptejä tai kommentoida niitä.  
 Reseptejä voi jälkikäteen muokata tai poistaa.  
