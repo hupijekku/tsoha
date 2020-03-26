@@ -13,6 +13,9 @@ class Post(db.Model):
     # Postauksen otsikko ja sisältö
     title = db.Column(db.String(144), nullable=False)
     content = db.Column(db.String(144), nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
     # Postauksen äänimäärä väliaikaisesti tässä, toteutetaan myöhemmässä vaiheessa
     # liitostaulun avulla (many-to-many suhde käyttäjään)
     votes = db.Column(db.Integer, default=0)
