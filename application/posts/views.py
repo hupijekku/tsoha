@@ -2,12 +2,19 @@ from application import app, db
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
-from application.posts.models import Post
+from sqlalchemy.sql import text
+
+from application.posts.models import Post, Vote
+from application.auth.models import User
 from application.posts.forms import PostForm
 
 @app.route("/posts", methods=["GET"])
 def posts_index():
-    return render_template("posts/list.html", posts = Post.query.all())
+    posts = Post.query.all()
+    post_list = []
+    for post in posts:
+        post_list.append((post, User.query.get(post.user_id).full_name, Vote.get_post_vote_count(post.id)))
+    return render_template("posts/list.html", posts = post_list)
 
 @app.route("/posts/new/")
 @login_required
@@ -18,7 +25,20 @@ def posts_form():
 @login_required
 def posts_vote(post_id):
     p = Post.query.get(post_id)
-    p.votes += 1
+
+    # Check if user has already voted this post
+    stmt = text("SELECT id FROM vote WHERE user_id = :u_id AND post_id = :p_id").params(u_id=current_user.id, p_id=post_id)
+    res = db.engine.execute(stmt)
+    response = []
+    for row in res:
+        response.append(row)
+    # If so, don't let the user vote again.
+    if len(response) > 0:
+        return redirect(url_for("posts_index"))
+
+    # User hasn't voted yet, add a vote to 'vote' table
+    v = Vote(current_user.id, p.id)
+    db.session().add(v)
     db.session().commit()
 
     return redirect(url_for("posts_index"))
