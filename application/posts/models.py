@@ -8,7 +8,7 @@ class Post(Base):
 
     # Postauksen otsikko ja sisältö
     title = db.Column(db.String(144), nullable=False)
-    content = db.Column(db.String(144), nullable=False)
+    content = db.Column(db.String(5000), nullable=False)
 
     # Viittaus postauksen tehneeseen käyttäjään
     user_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
