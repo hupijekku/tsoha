@@ -1,19 +1,16 @@
 # Tuodaan tietokanta
 from application import db
+from application.models import Base
+
 
 # Luodaan malli blogipostaukselle tietokantaan
-class Post(db.Model):
-    # Primary key (id)
-    id = db.Column(db.Integer, primary_key=True)
-    # Viittaus postauksen tehneeseen käyttäjään
-    user_id = db.Column(db.Integer)
-    # Päiväys jolloin postaus tehtiin
-    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+class Post(Base):
 
     # Postauksen otsikko ja sisältö
     title = db.Column(db.String(144), nullable=False)
     content = db.Column(db.String(144), nullable=False)
 
+    # Viittaus postauksen tehneeseen käyttäjään
     user_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
     # Postauksen äänimäärä väliaikaisesti tässä, toteutetaan myöhemmässä vaiheessa
