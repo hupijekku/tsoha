@@ -1,23 +1,17 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <table>
-        <tr>
-            <th> Post </th>
-            <th> Content </th>
-            <th> Votes </th>
-        </tr>
-        {% for post in posts %}
-        <tr>
-            <td>{{ post.title }}</td>
-            <td>{{ post.content }}</td>
-            <td>{{ post.votes }}</td>
-            <td>
-                <form method="POST" action="{{ url_for('posts_vote', post_id=post.id) }}">
-                    <input type="submit" value="Vote"/>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% for post in posts %}
+        <div class="container" id="post">
+            <h3> {{ post.title }} </h3>
+            Votes: {{ post.votes }}
+            <form method="POST" action="{{ url_for('posts_vote', post_id=post.id) }}">
+                <button type="submit" class="btn btn-success">Vote</button>
+            </form>
+            <div class="container" id="content">
+                {{ post.content }}
+            </div>
+        </div>
+        <br>
+    {% endfor %}
 {% endblock %}
