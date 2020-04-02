@@ -5,15 +5,20 @@
     <div class="form-group">
         <label> {{ form.name.label }} </label>
         {{ form.name }}
+        <ul>
+            {% for error in form.name.errors %}
+            <li> {{ error }} </li>
+            {% endfor %}
+        </ul>
     </div>
-    <ul>
-        {% for error in form.name.errors %}
-        <li> {{ error }} </li>
-        {% endfor %}
-    </ul>
     <div class="form-group">
         <label> {{ form.content.label }} </label>
         {{ form.content }}
+        <ul>
+            {% for error in form.content.errors %}
+            <li> {{ error }} </li>
+            {% endfor %}
+        </ul>
     </div>
     <button type="submit" class="btn btn-primary">Add post</button>
 </form>
