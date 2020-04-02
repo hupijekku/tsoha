@@ -1,0 +1,13 @@
+.eform {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.eform h3 {
+    padding: 5px 10px 5px;
+}
+
+.econtent {
+    border-style: ridge;
+    border-width: medium;
+}

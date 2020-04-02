@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
-
 {% block body %}
-    {% for post in posts %}
-        <div class="container" id="post">
-            <h3> {{ post.title }} </h3>
-            Votes: {{ post.votes }}
-            <form method="POST" action="{{ url_for('posts_vote', post_id=post.id) }}">
-                <button type="submit" class="btn btn-success">Vote</button>
+<link rel="stylesheet" href="{{ url_for('static', filename="css/list.css") }}"
+   {% for post in posts %}
+        <div class="container epost">
+            <form class="eform" method="POST" action="{{ url_for('posts_vote', post_id=post.id) }}">
+                <h3> {{ post.title }} </h3>
+                <button type="submit" class="btn btn-success btn-sm p-2">Vote</button>
             </form>
-            <div class="container" id="content">
+            Votes: {{ post.votes }}
+            <div class="container econtent">
                 {{ post.content }}
             </div>
         </div>

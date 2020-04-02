@@ -2,36 +2,20 @@
 
 {% block body %}
 <form method="POST" action="{{ url_for('posts_create') }}">
-    <table>
-        <tr>
-            <td>
-                {{ form.name.label }}
-            </td>
-            <td>
-                {{ form.name }}
-            </td>
-            <td>
-                <ul>
-                    {% for error in form.name.errors %}
-                    <li> {{ error }} </li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.content.label }}
-            </td>
-            <td>
-                {{ form.content }}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Add a new post"/>
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label> {{ form.name.label }} </label>
+        {{ form.name }}
+    </div>
+    <ul>
+        {% for error in form.name.errors %}
+        <li> {{ error }} </li>
+        {% endfor %}
+    </ul>
+    <div class="form-group">
+        <label> {{ form.content.label }} </label>
+        {{ form.content }}
+    </div>
+    <button type="submit" class="btn btn-primary">Add post</button>
 </form>
 {% endblock %}
 
