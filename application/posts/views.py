@@ -30,7 +30,7 @@ def posts_update(post_id):
 
     form = PostForm(request.form)
 
-    if post.user_id != current_user.id:
+    if post.user_id != current_user.id and not current_user.admin:
         return redirect(request.referrer)
 
     post.content = form.content.data
@@ -70,7 +70,7 @@ def posts_vote(post_id):
 @login_required(role="USER")
 def posts_delete(post_id):
     post = Post.query.get(post_id)
-    if post.user_id == current_user.id:
+    if post.user_id == current_user.id and not current_user.admin:
         db.session().delete(post)
         db.session().commit()
     return redirect(request.referrer)
