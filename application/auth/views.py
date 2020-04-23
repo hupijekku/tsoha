@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 
-from application import app, db
+from application import app, db, login_required
 from application.auth.models import User
 from application.auth.forms import LoginForm, RegisterForm
 
@@ -35,7 +35,7 @@ def auth_register():
     if not form.validate():
         return render_template("auth/register.html", form = form)
 
-    u = User(form.full_name.data, form.username.data, form.password.data)
+    u = User(form.full_name.data, form.username.data, form.password.data, "USER", False)
 
     db.session().add(u)
     db.session().commit()

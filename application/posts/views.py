@@ -1,6 +1,6 @@
-from application import app, db
+from application import app, db, login_required
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required, current_user
+from flask_login import current_user
 
 from sqlalchemy.sql import text
 
@@ -17,12 +17,12 @@ def posts_index():
     return render_template("posts/list.html", posts = post_list)
 
 @app.route("/posts/new/")
-@login_required
+@login_required(role="USER")
 def posts_form():
     return render_template("posts/new.html", form = PostForm())
 
 @app.route("/posts/<post_id>/update", methods=["GET", "POST"])
-@login_required
+@login_required(role="USER")
 def posts_update(post_id):
     post = Post.query.get(post_id)
     if request.method == "GET":
@@ -39,7 +39,7 @@ def posts_update(post_id):
     return redirect(url_for('posts_index'))
 
 @app.route("/posts/<post_id>/", methods=["GET", "POST"])
-@login_required
+@login_required(role="USER")
 def posts_vote(post_id):
     if request.method == "POST":
         p = Post.query.get(post_id)
@@ -67,7 +67,7 @@ def posts_vote(post_id):
     return redirect(url_for("posts_index"))
 
 @app.route("/posts/<post_id>/delete", methods=["POST"])
-@login_required
+@login_required(role="USER")
 def posts_delete(post_id):
     post = Post.query.get(post_id)
     if post.user_id == current_user.id:
@@ -76,7 +76,7 @@ def posts_delete(post_id):
     return redirect(request.referrer)
 
 @app.route("/posts/", methods=["POST"])
-@login_required
+@login_required(role="USER")
 def posts_create():
     form = PostForm(request.form)
 

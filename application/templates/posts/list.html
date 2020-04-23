@@ -7,12 +7,12 @@
                 <h3> {{ post[0].title }} </h3>
                 <button type="submit" class="btn btn-success btn-sm p-2">Vote</button>
             </form>
-            {% if post[0].user_id == current_user.id %}
+            {% if post[0].user_id == current_user.id or current_user.admin %}
             <div class="d-flex">
                 <form class="form-inline" method="POST" action="{{ url_for('posts_delete', post_id=post[0].id) }}">
                     <button type="submit" class="btn btn-danger btn-sm p-2">Delete</button>
                 </form>
-                <form class="form-inline" method="POST" action="{{ url_for('posts_update', post_id=post[0].id) }}">
+                <form class="form-inline" method="GET" action="{{ url_for('posts_update', post_id=post[0].id) }}">
                     <button type="submit" class="btn btn-info btn-sm p-2">Edit</button>
                 </form>
             </div>
