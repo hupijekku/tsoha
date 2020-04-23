@@ -7,6 +7,11 @@
                 <h3> {{ post[0].title }} </h3>
                 <button type="submit" class="btn btn-success btn-sm p-2">Vote</button>
             </form>
+            {% if post[0].user_id == current_user.id %}
+            <form class="eform" method="POST" action="{{ url_for('posts_delete', post_id=post[0].id) }}">
+                <button type="submit" class="btn btn-danger btn-sm p-2">Delete</button>
+            </form>
+            {% endif %}
             By: {{ post[1] }} Votes: {{ post[2] }}
             <div class="container econtent">
                 {{ post[0].content }}
