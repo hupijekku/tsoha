@@ -21,6 +21,23 @@ def posts_index():
 def posts_form():
     return render_template("posts/new.html", form = PostForm())
 
+@app.route("/posts/<post_id>/update", methods=["GET", "POST"])
+@login_required
+def posts_update(post_id):
+    post = Post.query.get(post_id)
+    if request.method == "GET":
+        return render_template("posts/update.html", post=post, form = PostForm(), text=post.content)
+
+    form = PostForm(request.form)
+
+    if post.user_id != current_user.id:
+        return redirect(request.referrer)
+
+    post.content = form.content.data
+    db.session().commit()
+
+    return redirect(url_for('posts_index'))
+
 @app.route("/posts/<post_id>/", methods=["GET", "POST"])
 @login_required
 def posts_vote(post_id):
