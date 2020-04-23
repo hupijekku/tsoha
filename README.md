@@ -16,9 +16,13 @@ Kirjautumattomat käyttäjät voivat selata reseptejä, mutta eivät voi lisät�
 Sivulta voi myös hakea reseptejä niille määriteltyjen tagien tai reseptin sisällön perusteella.  
 Reseptit voi järjestää päiväyksen tai äänimäärän perusteella.  
 
-Käyttäjätunnukset testaamista varten:  
+### Käyttäjätunnukset testaamista varten:  
+Käyttäjä:  
 ```
-username: test  password: password
+username: user  password: password
 ```
-
+Admin:  
+```
+username: admin  password: admin
+```
 
