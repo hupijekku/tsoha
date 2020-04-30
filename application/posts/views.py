@@ -73,6 +73,12 @@ def posts_vote(post_id):
 def posts_delete(post_id):
     post = Post.query.get(post_id)
     if post.user_id == current_user.id or current_user.admin:
+        posttags = PostTag.query.filter_by(post_id=post.id)
+        for tag in posttags:
+            db.session.delete(tag)
+        votes = Vote.query.filter_by(post_id=post.id)
+        for vote in votes:
+            db.session().delete(vote)
         db.session().delete(post)
         db.session().commit()
     return redirect(request.referrer)
