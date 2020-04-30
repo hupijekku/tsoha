@@ -37,6 +37,7 @@ def index():
     top_votes = []
     c = 0
     for row in res:
+        print(row)
         if c < 10:
             top_votes.append({"id": row[0], "title": row[1], "count": row[2]})
             c += 1

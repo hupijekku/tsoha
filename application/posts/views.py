@@ -72,7 +72,7 @@ def posts_vote(post_id):
 @login_required(role="USER")
 def posts_delete(post_id):
     post = Post.query.get(post_id)
-    if post.user_id == current_user.id and not current_user.admin:
+    if post.user_id == current_user.id or current_user.admin:
         db.session().delete(post)
         db.session().commit()
     return redirect(request.referrer)
@@ -106,6 +106,7 @@ def posts_create():
             pt = PostTag(t.id, p.id)
         else:
             pt = PostTag(tagd.id, p.id)
+
         db.session().add(pt)
         db.session().commit()
 

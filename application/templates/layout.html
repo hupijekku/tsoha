@@ -22,17 +22,31 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('posts_form')  }} ">Add a post</a>
                         </li>
-                        <li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('tags_list') }} ">Tags</a>
                         </li>
-                    </ul>
-                    <div class="form-inline mt-2 mt-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth_list') }}">Users</a>
+                        </li>
                         {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('auth_logout')  }}">Hello {{ current_user.full_name  }} -- Logout</a>
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ current_user.full_name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ url_for('auth_mypage') }}">My account</a>
+                                <a class="dropdown-item" href="{{ url_for('auth_logout') }}">Log out</a>
+                            </div>
+                        </li>
                         {% else %}
-                            <a class="enavlink" href="{{ url_for('auth_register') }}">Register</a> 
-                            <a class="enavlink" href="{{ url_for('auth_login')  }}">Login</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth_register') }}">Register</a> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth_login')  }}">Login</a>
+                        </li>
                         {% endif %}
+                    </ul>
                     </div>
                 </div>
             </div>

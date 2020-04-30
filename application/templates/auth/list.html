@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="mt-5 justify-content-around">
+        <h3> Users </h3>
+
+        <ul class="list-group">
+            {% for user in users %}
+                {% if not user.admin %} 
+                <li class="list-group-item"> {{ user.full_name }} ( {{ user.username }} )  -  Joined
+                at {{ user.date_created }} </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
