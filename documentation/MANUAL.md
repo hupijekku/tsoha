@@ -12,6 +12,15 @@ Painamalla navigaatiopalkista "List posts", voit selata sovellukseen lisättyjä
 Mikäli olet kirjautunut sisään, voit myös äänestää reseptejä joista pidät painamalla vihreää "Vote" nappia.  
 Voit myös muokata tai poistaa omia reseptejäsi tältä sivulta painamalla punaista "Delete" tai sinistä "Edit" nappia.  
 
+### Sivun tilastojen katsominen
+Etusivulta näet käyttäjät jotka ovat tehneet eniten postauksia, käytetyimmät tagit sekä äänestetyimmät postaukset.  
+Painamalla navigaatiopalkista "Tags" tai "Users" voit vastaavasti nähdä sivuilla jo luodut tagit sekä käyttäjät.  
+Admin käyttäjät eivät näy tässä listauksessa.  
+
+### Oman käyttäjän muokkaaminen
+Painamalla käyttäjälle asettamaasi nimeä navigaatiopalkista, ja klikkaamalla sitten "My account" pääset sivulle, jossa voit vaihtaa nimesi, käyttäjänimesi ja salasanasi.  
+Tältä sivulta voit myös poistaa käyttäjäsi pysyvästi. Tämä poistaa myös kaikki luomasi postaukset, sekä poistaa antamasi äänet.  
+
 ## Asennusohje
 Sovelluksen suorittamiseksi paikallisella koneella tarvitset Python 3:n.  
 Sovelluksen riippuvuudet voit asentaa juurikansiossa komennolla  
