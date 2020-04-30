@@ -79,6 +79,7 @@ def posts_delete(post_id):
         votes = Vote.query.filter_by(post_id=post.id)
         for vote in votes:
             db.session().delete(vote)
+        db.session().commit()
         db.session().delete(post)
         db.session().commit()
     return redirect(request.referrer)
