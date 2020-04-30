@@ -19,9 +19,8 @@ class Post(Base):
         self.title = title
         self.content = content
 
-class Vote(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
+class Vote(Base):
 
     user_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
@@ -38,3 +37,30 @@ class Vote(db.Model):
         for row in res:
             response.append(row[0])
         return response[0]
+
+
+class Tag(Base):
+
+    name = db.Column(db.String(144), nullable=False)
+
+    def __init__(self, name):
+        self.name = name
+
+
+class PostTag(Base):
+    
+    tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+
+    def __init__(self, tag_id, post_id):
+        self.tag_id = tag_id
+        self.post_id = post_id
+
+    @staticmethod
+    def get_post_tags(id):
+        stmt = text("SELECT name FROM post_tag LEFT JOIN tag ON post_tag.tag_id = tag.id WHERE post_id = :id").params(id=id)
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append(row[0])
+        return response

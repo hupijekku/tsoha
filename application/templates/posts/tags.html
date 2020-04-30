@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="d-fex m-5 justify-content-around">
+        <h3> Tags </h3>
+        <ul class="list">
+            
+            {% for tag in tags %}
+
+                <li> {{ tag.name }} </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+{% endblock %}

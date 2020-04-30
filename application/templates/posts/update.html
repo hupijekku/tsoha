@@ -2,10 +2,10 @@
 
 {% block body %}
 <form method="POST" action="{{ url_for('posts_update', post_id=post.id) }}">
-    <p> Update post </p>
+    <h3 class="col-sm-2 pt-4"> Update post </h3>
     <div class="form-group">
-        <label> {{ form.content.label }} </label>
-        <textarea name='content'>{{ text }}</textarea>
+        {{ form.content.label(class_="col-sm-2 col-form-label") }}
+        <textarea name='content' class="form-control">{{ text }}</textarea>
         <ul>
             {% for error in form.content.errors %}
             <li>{{ error }}</li>

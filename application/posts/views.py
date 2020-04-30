@@ -4,7 +4,7 @@ from flask_login import current_user
 
 from sqlalchemy.sql import text
 
-from application.posts.models import Post, Vote
+from application.posts.models import Post, Vote, Tag, PostTag
 from application.auth.models import User
 from application.posts.forms import PostForm
 
@@ -13,7 +13,9 @@ def posts_index():
     posts = Post.query.all()
     post_list = []
     for post in posts:
-        post_list.append((post, User.query.get(post.user_id).full_name, Vote.get_post_vote_count(post.id)))
+        print(PostTag.get_post_tags(post.id))
+        post_list.append((post, User.query.get(post.user_id).full_name,
+        Vote.get_post_vote_count(post.id), PostTag.get_post_tags(post.id)))
     return render_template("posts/list.html", posts = post_list)
 
 @app.route("/posts/new/")
@@ -80,6 +82,11 @@ def posts_delete(post_id):
 def posts_create():
     form = PostForm(request.form)
 
+    if (form.add_tag.data):
+        form.tags.append(form.tag.data)
+        form.tag.data = ''
+        return render_template("posts/new.html", form = form)
+
     if not form.validate():
         return render_template("posts/new.html", form = form)
 
@@ -89,4 +96,29 @@ def posts_create():
     db.session().add(p)
     db.session().commit()
 
+
+    for tag in form.tags:
+        tagd = Tag.query.filter_by(name=tag).first()
+        if not tagd:
+            t = Tag(tag)
+            db.session().add(t)
+            db.session().commit()
+            pt = PostTag(t.id, p.id)
+        else:
+            pt = PostTag(tagd.id, p.id)
+        db.session().add(pt)
+        db.session().commit()
+
+    PostForm.tags = []
+
     return redirect(url_for("posts_index"))
+
+@app.route("/tags/", methods=["GET"])
+def tags_list():
+
+    stmt = text("SELECT name FROM tag")
+    res = db.engine.execute(stmt)
+    response = []
+    for row in res:
+        response.append(row)
+    return render_template("/posts/tags.html", tags=response)

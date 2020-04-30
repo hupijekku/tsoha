@@ -1,13 +1,36 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <div class="container">
-        <h3> Top posters: </h3>
-        <ul>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3> Top posters: </h3>
+        </div>
+        <ol>
             {% for poster in top_posters %}
-            <li> {{ poster.full_name }} with {{ poster.count }} posts! </li>
+            <li class="text-dark mt-1"> {{ poster.full_name }} with {{ poster.count }} posts! </li>
             {% endfor %}
-        </ul>
+        </ol>
     </div>
+    <div class ="card mt-5">
+        <div class="card-header">
+            <h3> Top tags: </h3>
+        </div>
+        <ol>
+            {% for tag in top_tags %}
+            <li class="text-dark mt-1"> #{{ tag.name }} used in {{ tag.count }} posts! </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class ="card mt-5">
+        <div class="card-header">
+            <h3> Top posts: </h3>
+        </div>
+        <ol>
+            {% for post in top_votes %}
+            <li class="text-dark mt-1"> <a href="{{ url_for("posts_vote", post_id=post.id) }}">{{ post.title }}</a> with {{ post.count }} votes! </li>
+            {% endfor %}
+        </ol>
+    </div>
+
 {% endblock %}
 
